@@ -1,27 +1,15 @@
 import React, { useState } from "react";
-import {data} from "../data/lockerData";
-import img from '../kitchen-interior.jpg'
+import { data } from "../data/lockerData";
+import img from "../kitchen-interior.jpg";
+import '../styles/app.css'
+
 
 const LockerOverview = () => {
   const [dataArr, setdataArr] = useState(data);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        margin: "3em 2em",
-      }}
-    >
-      <div
-        style={{
-          height: "100%",
-          width: "15%",
-          color: "#005ECD",
-          fontSize: "16px",
-          fontWeight: "500",
-        }}
-      >
+    <div className="overview">
+      <div className="details">
         <div>
           <img src={img} alt="" height="200" width="100%" />
         </div>
@@ -29,9 +17,9 @@ const LockerOverview = () => {
         <div>5 stars</div>
         <div>0.3 Miles</div>
       </div>
-      <div style={{ width: "82%", display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ width: "20%", marginBottom: "2em" }}>
+      <div className="details2">
+        <div className="details2_inner">
+          <div className="dropdown">
             <form name="form1" id="form1" action="/action_page.php">
               <select
                 style={{
@@ -51,7 +39,7 @@ const LockerOverview = () => {
               </select>
             </form>
           </div>
-          <div>
+          <div className="guide_size_link">
             <a href="#">View the guide size</a>
           </div>
         </div>
@@ -59,6 +47,16 @@ const LockerOverview = () => {
           {dataArr.map((item) => (
             <Locker key={item.id} locker={item} />
           ))}
+        </div>
+        <div
+          style={{
+            marginTop: "1em",
+            color: "#005ECD",
+            fontSize: "13px",
+            fontWeight: "500",
+          }}
+        >
+          View all lockers at this location
         </div>
       </div>
     </div>
@@ -70,34 +68,30 @@ export default LockerOverview;
 const Locker = (props) => {
   const { name, details, price, numAvailable } = props.locker;
   return (
-    <div
-      style={{
-        background: "#EFEFEF",
-        marginTop: "1em",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "1em",
-        fontWeight: "bold",
-        fontSize:"14px",
-        color:"#242424"
-      }}
-    >
-      <div style={{ width: "10%" }}>{name}</div>
-      <div style={{ width: "20%" }}>{details}</div>
-      <div style={{ width: "20%"}}>{price}</div>
-      <div style={{ width: "20%" }}>
-        {numAvailable} Available
-      </div>
-      <div
-        style={{
-          background: "#5EBF5C",
-          color: "white",
-          padding: ".4em 2em",
-          fontSize: "12px",
-        }}
-      >
-        Rent Now
+    <div>
+      <div className="table-wrapper">
+        <table className="fl-table">
+          <tbody>
+            <tr>
+              <td>{name}</td>
+              <td>{details}</td>
+              <td>{price}</td>
+              <td>{numAvailable} Available</td>
+              <td>
+                <div
+                  style={{
+                    background: "#5EBF5C",
+                    color: "white",
+                    padding: ".4em 2em",
+                    fontSize: "12px",
+                  }}
+                >
+                  Rent Now
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
