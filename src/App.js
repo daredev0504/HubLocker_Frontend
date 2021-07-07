@@ -1,4 +1,5 @@
 import Header from './components/Header'
+import NavBar from './components/Nav/Navbar'
 import Hero from './components/Hero'
 import LockerOverview from './components/LockerOverview'
 
@@ -6,7 +7,7 @@ function App() {
   return (
     <div className="">
       <div>
-        <Header />
+     <NavBar />
       </div>
       <div>
         <Hero />

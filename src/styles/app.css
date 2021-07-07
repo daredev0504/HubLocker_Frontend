@@ -2,6 +2,7 @@
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+   font-family: "Roboto"
 }
 
 /* overview Styles */
@@ -36,6 +37,7 @@
 
 .table-wrapper {
   margin: 10px;
+
 }
 
 .fl-table {
