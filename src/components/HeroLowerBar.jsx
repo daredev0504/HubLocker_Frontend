@@ -1,6 +1,6 @@
 import React from "react";
 
-const HeroLowerBar = () => {
+const HeroLowerBar = (props) => {
   return (
     <div
       style={{
@@ -12,10 +12,10 @@ const HeroLowerBar = () => {
       }}
     >
       <div style={{ fontWeight: "500", color: "grey", fontSize: "18px" }}>
-        6 Open Lockers Available
+       {props.lockerlength ? props.lockerlength +" "+"Open Lockers Available":"No Lockers Found"}
       </div>
       <div style={{ width: "20%" }}>
-        <form name="form1" id="form1" action="/action_page.php">
+        <form name="form1" action="/action_page.php">
           <span style={{ fontWeight: "500", color: "grey", fontSize: "18px" }}>
             Sort By &nbsp;
           </span>
@@ -28,7 +28,6 @@ const HeroLowerBar = () => {
               backgroundColor: "#DDDBDB",
             }}
             name="sort"
-            id="sort"
           >
             <option value="" selected="selected">
               Backend
@@ -41,4 +40,7 @@ const HeroLowerBar = () => {
   );
 };
 
+HeroLowerBar.defaultProps = {
+  lockerlength: "0"
+};
 export default HeroLowerBar;

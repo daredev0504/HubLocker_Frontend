@@ -21,6 +21,11 @@ const Ul = styled.ul`
   li {
     padding: 18px 25px;
   }
+  li:hover {
+    background: #a3975d;
+    cursor: pointer;
+    color: #dadada;
+  }
 
   @media (max-width: 768px) {
     flex-flow: column nowrap;

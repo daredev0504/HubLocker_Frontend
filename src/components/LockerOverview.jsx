@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect} from "react";
 import { data } from "../data/lockerData";
 import img from "../kitchen-interior.jpg";
-import '../styles/app.css'
+import "../styles/app.css";
+import CreateSearchContext from "../context/Search/SearchContext";
 
+const LockerOverview = (props) => {
+//const [dataArr, setdataArr] = useState(data);
+const [lockers, setLockers] = useState([])
 
-const LockerOverview = () => {
-  const [dataArr, setdataArr] = useState(data);
+useEffect(() => {
+ setLockers(props.locations)
+}, [props.locations])
 
   return (
     <div className="overview">
@@ -44,7 +49,7 @@ const LockerOverview = () => {
           </div>
         </div>
         <div>
-          {dataArr.map((item) => (
+          {lockers.map((item) => (
             <Locker key={item.id} locker={item} />
           ))}
         </div>
@@ -66,16 +71,16 @@ const LockerOverview = () => {
 export default LockerOverview;
 
 const Locker = (props) => {
-  const { name, details, price, numAvailable } = props.locker;
+  const {id, name, size, numAvailable } = props.locker;
   return (
     <div>
       <div className="table-wrapper">
         <table className="fl-table">
           <tbody>
             <tr>
+              <td>{id}</td>
               <td>{name}</td>
-              <td>{details}</td>
-              <td>{price}</td>
+              <td>{size}</td>
               <td>{numAvailable} Available</td>
               <td>
                 <div

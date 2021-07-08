@@ -1,21 +1,19 @@
-import Header from './components/Header'
-import NavBar from './components/Nav/Navbar'
-import Hero from './components/Hero'
-import LockerOverview from './components/LockerOverview'
+import NavBar from "./components/Nav/Navbar";
+import Hero from "./components/Hero";
+import SearchState from "./context/Search/SearchState";
 
 function App() {
   return (
-    <div className="">
-      <div>
-     <NavBar />
+    <SearchState>
+      <div className="">
+        <div>
+          <NavBar />
+        </div>
+        <div>
+          <Hero />
+        </div>
       </div>
-      <div>
-        <Hero />
-      </div>
-      <div>
-        <LockerOverview />
-      </div>
-    </div>
+    </SearchState>
   );
 }
 
