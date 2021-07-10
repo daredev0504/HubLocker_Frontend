@@ -27,9 +27,21 @@ const SearchState = (props) => {
           `api/location/withlockers?searchTerm=${state.searchParameter}`
         );
 
-        console.log(resp.data);
+        const allLockers = resp.data.data;
 
-        dispatch({ type: SEARCH_LOCATION, payload: resp.data.data[0].lockers });
+        var tempArray = [];
+        
+        allLockers.map(function (item) {
+          item.lockers.map(function (locker) {
+            tempArray.push(locker);
+            return locker
+          });
+            return tempArray;
+        });
+
+        console.log("newLocker", tempArray);
+
+        dispatch({ type: SEARCH_LOCATION, payload: tempArray });
       } catch (error) {
         // Handle Error Here
         console.log(error.message);
@@ -37,11 +49,10 @@ const SearchState = (props) => {
           dispatch({ type: AUTH_ERROR });
           dispatch({
             type: SEARCH_LOCATION,
-            payload: []
+            payload: [],
           });
         }
-          dispatch({ type: CLEAR_ERRORS });
-        
+        dispatch({ type: CLEAR_ERRORS });
       }
     };
     //eslint-disable

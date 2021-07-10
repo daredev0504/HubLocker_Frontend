@@ -12,7 +12,7 @@ const LockerOverview = (props) => {
 
   const showLockers = () => {
     if (lockers.length > 0) {
-      return lockers.map((item) => <Locker key={item.id} locker={item} />);
+      return lockers.map((item) =>  <Locker key={item.id} locker={item} />);
     }
      else{
       return <div style={{ color: "#ddd", fontSize:"50px", textAlign:"center" }}>Lockers will Appear here</div>;
