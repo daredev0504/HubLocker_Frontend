@@ -1,18 +1,25 @@
-import NavBar from "./components/Nav/Navbar";
-import Hero from "./components/Hero";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SearchState from "./context/Search/SearchState";
+import RentLocker from "./pages/RentLocker";
+import Home from './pages/Home'
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
     <SearchState>
-      <div className="">
-        <div>
-          <NavBar />
-        </div>
-        <div>
-          <Hero />
-        </div>
-      </div>
+      <Router>
+        <Switch>
+          <Route path="/rent">
+            <RentLocker />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route exact path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </Router>
     </SearchState>
   );
 }

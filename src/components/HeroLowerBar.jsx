@@ -12,7 +12,7 @@ const HeroLowerBar = (props) => {
       }}
     >
       <div style={{ fontWeight: "500", color: "grey", fontSize: "18px" }}>
-       {props.lockerlength ? props.lockerlength +" "+"Open Lockers Available":"No Lockers Found"}
+       {props.lockerlength ? props.lockerlength + " Open Lockers Available":"No Lockers Found"}
       </div>
       <div style={{ width: "20%" }}>
         <form name="form1" action="/action_page.php">
@@ -29,7 +29,7 @@ const HeroLowerBar = (props) => {
             }}
             name="sort"
           >
-            <option value="" selected="selected">
+            <option value="" defaultValue>
               Backend
             </option>
             <option value="">Frontend</option>
@@ -40,7 +40,4 @@ const HeroLowerBar = (props) => {
   );
 };
 
-HeroLowerBar.defaultProps = {
-  lockerlength: "0"
-};
 export default HeroLowerBar;

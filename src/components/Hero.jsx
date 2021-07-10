@@ -16,35 +16,37 @@ const DIV = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 576px) {
+    display: block;
+    text-align: center;
+    .img {
+      height: 40px;
+    }
+    input{
+    
+    }
+  }
 `;
 
 const Hero = () => {
 const context = useContext(CreateSearchContext);
 const datas = context.location
+const isError = context.isError
 
 const [locations, setLocations] = useState([]);
 
 console.log(datas)
+
 useEffect(() => {
-  // let toArray = []
-  // if(datas.data.length > 1){
-  //    for (let i = 0, len = datas.data.length; i < len; i++) {
-  //      toArray.push(datas.data[i]);
-  //    }
-  //    setLocations(toArray.lockers);
-  // }
- setLocations(datas.data[0].lockers)
+
+  setLocations(datas)
+ 
 }, [datas])
 
-//const [lockers, setsockers] = useState(datas.data[0].lockers);
-
-console.log("====================================");
-//console.log(datas)
-//console.log(locations.data[0].lockers.length)
-//console.log(locations.length)
 //console.log(lockers)
 console.log(locations)
-console.log("===================================");
+console.log(isError)
 
   return (
     <div>
@@ -67,7 +69,6 @@ console.log("===================================");
             }}
           >
             Find a Locker
-            
           </p>
         </div>
         <DIV>
@@ -88,7 +89,7 @@ console.log("===================================");
             type="text"
           />
           <div onClick={context.handleSubmit}>
-            <img src={searchIcon} alt="search" height="80" />
+            <img className="img" src={searchIcon} alt="search" height="80" />
           </div>
         </DIV>
       </div>

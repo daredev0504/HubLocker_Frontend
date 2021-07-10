@@ -1,16 +1,23 @@
-import React, { useState, useContext, useEffect} from "react";
-import { data } from "../data/lockerData";
+import React, { useState, useEffect } from "react";
 import img from "../kitchen-interior.jpg";
 import "../styles/app.css";
-import CreateSearchContext from "../context/Search/SearchContext";
+import { Link } from "react-router-dom";
 
 const LockerOverview = (props) => {
-//const [dataArr, setdataArr] = useState(data);
-const [lockers, setLockers] = useState([])
+  const [lockers, setLockers] = useState([]);
 
-useEffect(() => {
- setLockers(props.locations)
-}, [props.locations])
+  useEffect(() => {
+    setLockers(props.locations);
+  }, [props.locations]);
+
+  const showLockers = () => {
+    if (lockers.length > 0) {
+      return lockers.map((item) => <Locker key={item.id} locker={item} />);
+    }
+     else{
+      return <div style={{ color: "#ddd", fontSize:"50px", textAlign:"center" }}>Lockers will Appear here</div>;
+    }
+  };
 
   return (
     <div className="overview">
@@ -37,7 +44,7 @@ useEffect(() => {
                 name="sort"
                 id="sort"
               >
-                <option value="" selected="selected">
+                <option value="" defaultValue>
                   Backend
                 </option>
                 <option value="">Frontend</option>
@@ -45,13 +52,11 @@ useEffect(() => {
             </form>
           </div>
           <div className="guide_size_link">
-            <a href="#">View the guide size</a>
+            <Link to="/none">View the guide size</Link>
           </div>
         </div>
         <div>
-          {lockers.map((item) => (
-            <Locker key={item.id} locker={item} />
-          ))}
+        {showLockers()}
         </div>
         <div
           style={{
@@ -71,7 +76,7 @@ useEffect(() => {
 export default LockerOverview;
 
 const Locker = (props) => {
-  const {id, name, size, numAvailable } = props.locker;
+  const { id, name, size, numAvailable } = props.locker;
   return (
     <div>
       <div className="table-wrapper">
@@ -83,15 +88,20 @@ const Locker = (props) => {
               <td>{size}</td>
               <td>{numAvailable} Available</td>
               <td>
-                <div
-                  style={{
-                    background: "#5EBF5C",
-                    color: "white",
-                    padding: ".4em 2em",
-                    fontSize: "12px",
-                  }}
-                >
-                  Rent Now
+                <div>
+                  <Link
+                    style={{
+                      background: "#5EBF5C",
+                      color: "white",
+                      padding: ".4em 2em",
+                      fontSize: "12px",
+                      textDecoration: "none",
+                    }}
+                    to="/rent"
+                  >
+                    {" "}
+                    Rent Now
+                  </Link>
                 </div>
               </td>
             </tr>

@@ -3,9 +3,8 @@ import {
   VALIDATE_AGE,
   VALIDATE_EMPTY,
   REMOVE_LOCATION,
-  CLOSE_MODAL,
   FIELD,
-  CLEAR_FIELD,
+  CLEAR_ERRORS,
   AUTH_ERROR,
 } from "../../types";
 
@@ -40,6 +39,13 @@ export const reducer = (state, action) => {
         ...state,
         isError: true,
         errorMessage: "No lockers in the location"
+        
+      };
+       case CLEAR_ERRORS:
+      return {
+        ...state,
+        isError: false,
+        errorMessage: "Ignore me ooo"
         
       };
     case FIELD:

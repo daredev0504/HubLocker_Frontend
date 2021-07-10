@@ -6,7 +6,7 @@ import {
   SEARCH_LOCATION,
   AUTH_ERROR,
   FIELD,
-  CLEAR_FIELD,
+  CLEAR_ERRORS,
 } from "../../types";
 import axios from "axios";
 
@@ -16,28 +16,38 @@ const SearchState = (props) => {
     isError: "",
     errorMessage: "",
     location: [],
-    searchParameter: ""
+    searchParameter: "",
   };
- const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-useEffect(() => {
-  const sendGetRequest = async () => {
-    try {
-      const resp = await axios.get(`api/location/withlockers?searchTerm=${state.searchParameter}`);
-      dispatch({ type: SEARCH_LOCATION, payload: resp.data });
-    } catch (error) {
-      // Handle Error Here
-      console.log(error);
-      if (error){
-        dispatch({ type: AUTH_ERROR });
+  useEffect(() => {
+    const sendGetRequest = async () => {
+      try {
+        const resp = await axios.get(
+          `api/location/withlockers?searchTerm=${state.searchParameter}`
+        );
+
+        console.log(resp.data);
+
+        dispatch({ type: SEARCH_LOCATION, payload: resp.data.data[0].lockers });
+      } catch (error) {
+        // Handle Error Here
+        console.log(error.message);
+        if (error) {
+          dispatch({ type: AUTH_ERROR });
+          dispatch({
+            type: SEARCH_LOCATION,
+            payload: []
+          });
+        }
+          dispatch({ type: CLEAR_ERRORS });
+        
       }
-      
-    }
-  };
-  //eslint-disable
+    };
+    //eslint-disable
 
-  sendGetRequest();
-}, [state.searchParameter])
+    sendGetRequest();
+  }, [state.searchParameter]);
 
   const handleChange = (event) => {
     dispatch({
@@ -53,10 +63,7 @@ useEffect(() => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    
   };
-
-  
 
   return (
     <CreateSearchContext.Provider
